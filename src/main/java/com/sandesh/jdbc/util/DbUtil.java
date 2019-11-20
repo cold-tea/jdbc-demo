@@ -13,11 +13,18 @@ public class DbUtil {
 	private final static String username = "sa";
 	private final static String password = "";
 	private static Connection connection = null;
+	
+	/*
+	private final static String connectionString = "jdbc:mysql://10.0.2.15:3306/sandesh_db";
+	private final static String username = "root";
+	private final static String password = "";
+	private static Connection connection = null;
+	*/
 
 	public static Connection getConnection() {
 		
 		try {
-			Class.forName("org.h2.Driver");   
+			Class.forName("com.mysql.cj.jdbc.Driver");   
 			connection =  DriverManager.getConnection(connectionString, username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();

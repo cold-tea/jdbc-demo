@@ -14,7 +14,7 @@ public class Main {
 		System.out.println(stuService.getStudents());
 		
 		// Insert student
-		Student student = new Student(5, "Dummy Name", "Dummy Address", "M");
+		Student student = new Student(6, "Dummy Name", "Dummy Address", "M");
 		System.out.println("Number of rows inserted: " + stuService.addStudent(student));
 		
 	}

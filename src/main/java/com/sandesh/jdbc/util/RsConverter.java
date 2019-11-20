@@ -15,7 +15,6 @@ public class RsConverter {
 			students.add(new Student(
 					rs.getInt("id"), rs.getString("name"),rs.getString("address"),rs.getString("gender")));
 		}
-		rs.close();
 		return students;
 	}
 }

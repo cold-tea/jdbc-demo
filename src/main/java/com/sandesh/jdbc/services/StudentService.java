@@ -13,22 +13,31 @@ import com.sandesh.jdbc.util.RsConverter;
 
 public class StudentService {
 
-	public List<Student> getStudents() throws SQLException {
-		Connection connection = DbUtil.getConnection();
-		String query = "SELECT * FROM student";
-		Statement stmt = connection.createStatement();
-		ResultSet rs = stmt.executeQuery(query);
-		return RsConverter.rsToStudents(rs);
+	public List<Student> getStudents(){
+		try(Connection connection = DbUtil.getConnection();
+				Statement stmt = connection.createStatement();) {
+			String query = "SELECT * FROM student";
+			ResultSet rs = stmt.executeQuery(query);
+			return RsConverter.rsToStudents(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	public int addStudent(Student student) throws SQLException {
-		Connection connection = DbUtil.getConnection();
+	public Integer addStudent(Student student) { 
 		String query = "INSERT INTO student VALUES (?,?,?,?)";
-		PreparedStatement prepStmt = connection.prepareStatement(query);
-		prepStmt.setInt(1, student.getId());
-		prepStmt.setString(2, student.getName());
-		prepStmt.setString(3, student.getAddress());
-		prepStmt.setString(4, student.getGender());
-		return prepStmt.executeUpdate();
+		try(Connection connection = DbUtil.getConnection();
+				PreparedStatement prepStmt = connection.prepareStatement(query);) {
+			
+			prepStmt.setInt(1, student.getId());
+			prepStmt.setString(2, student.getName());
+			prepStmt.setString(3, student.getAddress());
+			prepStmt.setString(4, student.getGender());
+			return prepStmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;	
 	}
 }
